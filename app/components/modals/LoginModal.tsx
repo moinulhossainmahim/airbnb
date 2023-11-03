@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import axios from "axios";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { AiFillGithub } from "react-icons/ai";
@@ -88,13 +87,13 @@ const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn('google')}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn('github')}
       />
       <div
         className="
@@ -104,15 +103,18 @@ const LoginModal = () => {
           font-light
         "
       >
-        <p>Already have an account?
+        <p>Not registered yet?
           <span
-            onClick={registerModal.onClose}
+            onClick={() => {
+              loginModal.onClose();
+              registerModal.onOpen();
+            }}
             className="
               text-neutral-800
               cursor-pointer
               hover:underline
             "
-            > Log in</span>
+            > Register</span>
         </p>
       </div>
     </div>
