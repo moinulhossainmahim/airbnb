@@ -34,15 +34,15 @@ const RegisterModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios.post('/api/register', data)
-    .then(() => {
-      registerModal.onClose();
-    })
-    .catch((error) => {
-      toast.error('Something went wrong');
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .then(() => {
+        registerModal.onClose();
+      })
+      .catch((error) => {
+        toast.error('Something went wrong');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   const bodyContent = (
