@@ -7,7 +7,6 @@ import ListingCard from "./components/listings/ListingCard";
 export default async function Home() {
   const listings = await getListings();
   const currrentUser = await getCurrentUser();
-  const isEmpty = true;
 
   if (!listings.length) {
     return <EmptyState showReset />
