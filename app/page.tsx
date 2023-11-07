@@ -3,6 +3,7 @@ import getListings from "./actions/getListings";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
+import { SafeListing } from "./types";
 
 export default async function Home() {
   const listings = await getListings();
@@ -27,7 +28,7 @@ export default async function Home() {
           gap-8
         "
       >
-        {listings.map((listing) => (
+        {listings.map((listing: SafeListing) => (
           <ListingCard
             currentUser={currrentUser}
             key={listing.id}
