@@ -5,13 +5,15 @@ import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
 import { SafeListing } from "./types";
 
+export const dynamic = 'force-dynamic';
+
 interface HomeProps {
   searchParams: IListingsParams;
 }
 
 export default async function Home({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams);
-  const currrentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser();
 
   if (!listings.length) {
     return <EmptyState showReset />
@@ -34,7 +36,7 @@ export default async function Home({ searchParams }: HomeProps) {
       >
         {listings.map((listing: SafeListing) => (
           <ListingCard
-            currentUser={currrentUser}
+            currentUser={currentUser}
             key={listing.id}
             data={listing}
           />
