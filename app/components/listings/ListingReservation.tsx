@@ -6,9 +6,9 @@ import Button from "../Button";
 import Calendar from "../inputs/Calendar";
 
 interface ListingReservationProps {
-  price: number;
+  price?: number;
   dateRange: Range,
-  totalPrice: number;
+  totalPrice?: number;
   onChangeDate: (value: Range) => void;
   onSubmit: () => void;
   disabled?: boolean;
