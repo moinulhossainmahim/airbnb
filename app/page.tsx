@@ -1,28 +1,34 @@
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "./actions/getListings";
+import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
 import { SafeListing } from "./types";
 
-export const dynamic = 'force-dynamic';
-
 interface HomeProps {
   searchParams: IListingsParams;
 }
+
+export const dynamic = 'force-static';
 
 export default async function Home({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (!listings.length) {
-    return <EmptyState showReset />
+    return (
+      <ClientOnly>
+        <EmptyState showReset />
+      </ClientOnly>
+    )
   }
 
   return (
-    <Container>
-      <div
-        className="
+    <ClientOnly>
+      <Container>
+        <div
+          className="
           pt-24
           grid
           grid-cols-1
@@ -32,16 +38,17 @@ export default async function Home({ searchParams }: HomeProps) {
           xl:grid-cols-5
           2xl:grid-cols-6
           gap-8
-        "
-      >
-        {listings.map((listing: SafeListing) => (
-          <ListingCard
+          "
+          >
+          {listings.map((listing: SafeListing) => (
+            <ListingCard
             currentUser={currentUser}
             key={listing.id}
             data={listing}
-          />
-        ))}
-      </div>
-    </Container>
+            />
+            ))}
+        </div>
+      </Container>
+    </ClientOnly>
   )
 }

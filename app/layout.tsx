@@ -11,6 +11,7 @@ import RegisterModal from './components/modals/RegisterModal'
 import LoginModal from './components/modals/LoginModal'
 import RentModal from './components/modals/RentModal'
 import SearchModal from './components/modals/SearchModal'
+import ClientOnly from './components/ClientOnly'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
   title: 'Airbnb',
   description: 'Airbnb clone',
 }
-
 
 export default async function RootLayout({
   children,
@@ -30,16 +30,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        {/* <Modal isOpen title='test' actionLabel='submit' /> */}
-        <ToasterProvider />
-        <RegisterModal />
-        <RentModal />
-        <SearchModal />
-        <LoginModal />
-        <Navbar currentUser={currentUser} />
-        <div className="pb-20 pt-28">
-          {children}
-        </div>
+        <ClientOnly>
+          <ToasterProvider />
+          <RegisterModal />
+          <RentModal />
+          <SearchModal />
+          <LoginModal />
+          <Navbar currentUser={currentUser} />
+        </ClientOnly>
+          <div className="pb-20 pt-28">
+            {children}
+          </div>
       </body>
     </html>
   )
